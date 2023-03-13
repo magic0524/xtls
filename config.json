@@ -1,0 +1,116 @@
+{
+    "log": {
+        "loglevel": "warning",
+        "access": "/var/log/xray/access.log",
+        "error": "/var/log/xray/error.log"
+    },
+    "inbounds": [
+        {
+            "sniffing": {
+                "enabled": true,
+                "destOverride": ["http", "tls"]
+            },
+            "port": 443,
+            "protocol": "vless",
+            "settings": {
+                "decryption":"none",
+                "clients": [
+                    {
+                        "flow": "xtls-rprx-direct",
+                        "id": "24076f92-f71f-4f32-87e6-fba6cf227055",
+                        "level": 0
+                    }
+                ],
+                "fallbacks": [
+                    {
+                        "dest": 444,
+                        "xver": 0
+                    },
+                    {
+                        "path": "/beebee",
+                        "dest": 445,
+                        "xver": 1
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "xtls",
+                "xtlsSettings": {
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/letsencrypt/live/haojiumeichiludingjile1202.top/fullchain.pem",
+                            "keyFile": "/etc/letsencrypt/live/haojiumeichiludingjile1202.top/privkey.pem"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "port": 445,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "24076f92-f71f-4f32-87e6-fba6cf227055",
+                        "level": 0
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "acceptProxyProtocol": true,
+                    "path": "/beebee"
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "settings": {}
+        },
+        {
+            "protocol": "blackhole",
+            "settings": {},
+            "tag": "blocked"
+        },
+        {
+            "tag":"cf_warp",
+            "protocol": "socks",
+            "settings": {
+                "servers": [
+                     {
+                        "address": "127.0.0.1",
+                        "port": 40000
+                    }
+                ]
+            }
+        }
+    ],
+    "routing": {
+        "rules": [
+            {
+                "type": "field",
+                "outboundTag": "cf_warp",
+                "domain": [
+                    "geosite:netflix",
+                    "domain:openai.com",
+		    "ip138.com"
+		]
+            },
+            {
+                "type": "field",
+                "ip": ["geoip:private"],
+                "outboundTag": "blocked"
+            }
+        ]
+    }
+}
