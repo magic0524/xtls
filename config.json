@@ -10,6 +10,18 @@
                 "enabled": true,
                 "destOverride": ["http", "tls"]
             },
+            "protocol": "socks",
+            "listen": "127.0.0.1",
+            "port": 10800,
+            "settings": {
+                "udp": true
+            }
+        },
+        {
+            "sniffing": {
+                "enabled": true,
+                "destOverride": ["http", "tls"]
+            },
             "port": 443,
             "protocol": "vless",
             "settings": {
@@ -103,7 +115,8 @@
                 "domain": [
                     "geosite:netflix",
                     "domain:openai.com",
-		    "ip138.com"
+		    "ip138.com",
+		    "domain:bing.com"
 		]
             },
             {
@@ -112,5 +125,11 @@
                 "outboundTag": "blocked"
             }
         ]
+    },
+    "dns": {
+        "server": [
+             "1.1.1.1",
+             "1.0.0.1"
+         ]
     }
 }
