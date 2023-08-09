@@ -1,0 +1,104 @@
+{
+    "log": {
+        "loglevel": "error",
+        "access": "/var/log/xray/access.log",
+        "error": "/var/log/xray/error.log"
+    },
+    "inbounds": [
+        {
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            },
+            "port": 443,
+            "protocol": "vless",
+            "settings": {
+                "decryption": "none",
+                "clients": [
+                    {
+                        "flow": "xtls-rprx-vision",
+                        "id": "24076f92-f71f-4f32-87e6-fba6cf227055"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "realitySettings": {
+                    "show": false,
+                    "dest": "www.lovelive-anime.jp:443",
+                    "serverNames": [
+                        "www.lovelive-anime.jp"
+                    ],
+                    "privateKey": "GNd5h7ySh7-f8M_1JnI9LAQj5AnzOxmFLOp8VosCRVw",
+                    "shortIds": [
+                        "20b77eb323544adb"
+                    ]
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "blocked"
+        },
+        {
+            "tag": "cf_warp",
+            "protocol": "socks",
+            "settings": {
+                "servers": [
+                    {
+                        "address": "127.0.0.1",
+                        "port": 40000
+                    }
+                ]
+            }
+        }
+    ],
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "rules": [
+            {
+                "type": "field",
+                "outboundTag": "cf_warp",
+                "domain": [
+                    "geosite:netflix",
+                    "domain:openai.com",
+                    "domain:ip138.com",
+                    "domain:bing.com"
+                ]
+            },
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:cn",
+                    "geoip:private"
+                ],
+                "outboundTag": "blocked"
+            }
+        ]
+    },
+    "dns": {
+        "server": [
+            "1.1.1.1",
+            "1.0.0.1"
+        ]
+    },
+    "policy": {
+        "levels": {
+            "0": {
+                "handshake": 2,
+                "connIdle": 120
+            }
+        }
+    }
+}
