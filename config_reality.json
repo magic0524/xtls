@@ -30,9 +30,9 @@
                 "security": "reality",
                 "realitySettings": {
                     "show": false,
-                    "dest": "www.lovelive-anime.jp:443",
+                    "dest": "www.microsoft.com:443",
                     "serverNames": [
-                        "www.lovelive-anime.jp"
+                        "www.microsoft.com"
                     ],
                     "privateKey": "GNd5h7ySh7-f8M_1JnI9LAQj5AnzOxmFLOp8VosCRVw",
                     "shortIds": [
