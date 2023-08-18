@@ -14,6 +14,49 @@
                     "quic"
                 ]
             },
+            "port": 444,
+            "protocol": "vless",
+            "settings": {
+                "decryption":"none",
+                "clients": [
+                    {
+                        "flow": "xtls-rprx-vision",
+                        "id": "24076f92-f71f-4f32-87e6-fba6cf227055",
+                        "level": 0
+                    }
+                ],
+                "fallbacks": [
+                    {
+                        "dest": 8000,
+                        "xver": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/letsencrypt/live/haojiumeichiludingjile1202.top/fullchain.pem",
+                            "keyFile": "/etc/letsencrypt/live/haojiumeichiludingjile1202.top/privkey.pem"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            },
             "port": 443,
             "protocol": "vless",
             "settings": {

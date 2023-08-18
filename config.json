@@ -28,27 +28,22 @@
                 "decryption":"none",
                 "clients": [
                     {
-                        "flow": "xtls-rprx-direct",
+                        "flow": "xtls-rprx-vision",
                         "id": "24076f92-f71f-4f32-87e6-fba6cf227055",
                         "level": 0
                     }
                 ],
                 "fallbacks": [
                     {
-                        "dest": 444,
+                        "dest": 8000,
                         "xver": 0
-                    },
-                    {
-                        "path": "/beebee",
-                        "dest": 445,
-                        "xver": 1
                     }
                 ]
             },
             "streamSettings": {
                 "network": "tcp",
-                "security": "xtls",
-                "xtlsSettings": {
+                "security": "tls",
+                "tlsSettings": {
                     "alpn": [
                         "http/1.1"
                     ],
@@ -58,28 +53,6 @@
                             "keyFile": "/etc/letsencrypt/live/haojiumeichiludingjile1202.top/privkey.pem"
                         }
                     ]
-                }
-            }
-        },
-        {
-            "port": 445,
-            "listen": "127.0.0.1",
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "24076f92-f71f-4f32-87e6-fba6cf227055",
-                        "level": 0
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "acceptProxyProtocol": true,
-                    "path": "/beebee"
                 }
             }
         }
