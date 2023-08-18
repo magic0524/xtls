@@ -30,9 +30,9 @@
                 "security": "reality",
                 "realitySettings": {
                     "show": false,
-                    "dest": "www.microsoft.com:443",
+                    "dest": "www.ucla.edu:443",
                     "serverNames": [
-                        "www.microsoft.com"
+                        "www.ucla.edu"
                     ],
                     "privateKey": "GNd5h7ySh7-f8M_1JnI9LAQj5AnzOxmFLOp8VosCRVw",
                     "shortIds": [

@@ -115,13 +115,13 @@
                 "domain": [
                     "geosite:netflix",
                     "domain:openai.com",
-		    "ip138.com",
+		    "domain:ip138.com",
 		    "domain:bing.com"
 		]
             },
             {
                 "type": "field",
-                "ip": ["geoip:private"],
+                "ip": ["geoip:private", "geoip:cn"],
                 "outboundTag": "blocked"
             }
         ]
